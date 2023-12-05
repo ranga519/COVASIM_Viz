@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>DataVis Covasim Visualization</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+      <!-- Include Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+
+    <style>
+      .container {
+        height: 200px;
+        position: relative;
+        border: 3px solid green;
+      }
+      
+      .vertical-center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      </style>
+
+    <h1><center>COVASIM DATA VISUALIZATION</center></h1>
+
+    <div class="container">
+      <div class="vertical-center">
+        <button onclick="plotInfections()">Plot Cumulative Infections</button>
+        <button onclick="plotDeaths()">Plot Cumulative Deaths</button>
+        <button onclick="plotSevere()">Plot Cumulative Severe</button>
+
+        <label for="pop_size">Size of Population:</label>
+
+        <input type="text" id="pop_size" name="pop_size" required minlength="0" maxlength="8" size="10" />
+
+        <label for="beta">Beta</label>
+
+        <input type="text" id="beta" name="beta" required minlength="0" maxlength="8" size="10" />
+
+
+
+<!-- Original -->
+        <section id="app" class="row" @mousemove="resize_apply" @mouseup="resize_end">
+  <header>
+    <b-navbar type="dark" variant="dark">
+      <b-navbar-brand href="#">
+        <span class="logo-idm"></span>
+        {{ app.title }}
+      </b-navbar-brand>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item :href="app.docs_url" target="_blank">ABM_DataVizLab</b-nav-item>
+        <b-nav-item :href="app.paper_url" target="_blank">Paper-clmson</b-nav-item>
+        <b-nav-item v-b-modal.about>About</b-nav-item>
+        <b-nav-item href="https://institutefordiseasemodeling.github.io/covasim-docs/whatsnew.html" target="_blank">{{app.version}}</b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
+
+<!-- Original -->
+<b-button v-if="running" variant="success" size="lg" class="btn-run green" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Running...
+</b-button>
+
+      </div>
+    </div>
+    
+
+
+    <div id="visualization-container">
+        <svg id="cum_infections"></svg>
+        <svg id="cum_deaths"></svg>
+        <svg id="cum_severe"></svg>
+    </div>
+
+    <script src="infections.js"></script>
+    <script src="deaths.js"></script>
+    <script src="severe.js"></script>
+    <script src="cova_app.js" type="text/javascript"></script>
+	
+
+  </body>
+</html>
+
